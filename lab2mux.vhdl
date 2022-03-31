@@ -1,22 +1,57 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-entity mux is
-    Port ( A : in STD_LOGIC;
-           B : in STD_LOGIC;
-           C : in STD_LOGIC;
-           D : in STD_LOGIC;
-           S : in STD_LOGIC_VECTOR (1 downto 0);
-           Y : out STD_LOGIC);
-end mux;
 
-architecture Behavioral of mux is
+
+entity testbench is
+end testbench;
+
+architecture Behavioral of testbench is
+   
+    COMPONENT mux 
+    PORT(
+        A: IN std_logic;
+        B: IN std_logic;
+        C: IN std_logic;
+        D: IN std_logic;
+        S: IN std_logic_vector (1 downto 0));
+        Y: OUT std_logic; 
+    );
+    END COMPONENT;
+    
+    signal A : std_logic := '0';
+    signal B : std_logic := '0';
+    signal C : std_logic := '0';
+    signal D : std_logic := '0';
+    signal S : std_logic_vector (1 downto 0) := (others=>'0');
+    
+    signal Y : std_logic;
 
 begin
-with S select
-
-Y<= A when "00",
-    B when "01",
-    C when "10",
-    D when others;
+    uut: mux PORT MAP (
+          A => A,
+          B => B,
+          C => C,
+          D => D,
+          S => S,
+          Y => Y
+        );
+    stim_proc: process
+    begin
+        wait for 100ns;
+        
+        A<='1';
+        B<='0';
+        C<='0';
+        D<='1';
+        
+        S<="00";
+        wait for 100 ns;
+        S<="01";
+        wait for 100 ns;
+        S<="10";
+        wait for 100 ns;
+        S<="11";
+        wait for 100 ns;
+        end process;
 
 end Behavioral;
