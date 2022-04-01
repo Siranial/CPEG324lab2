@@ -11,12 +11,12 @@ port(
 end reg;
 architecture behav of reg is
 begin
-    process(clock)
-    if(rising_edge(clock)='1') then
-    if (enable = '1') then
-    O<=I;
-    
-    end if;
+    process(clock, enable)
+    begin
+    if rising_edge(clock) then
+      if (enable = '1') then
+        O<=I;
+      end if;
     end if;
     end process;
 end behav;
