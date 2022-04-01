@@ -8,13 +8,31 @@ end reg_tb;
 architecture behav of reg_tb is
 --  Declaration of the component that will be instantiated.
 component reg
-port(	
-	I:	in std_logic_vector (3 downto 0); -- for loading
-    clock:		in std_logic; -- rising-edge triggering 
-	enable:		in std_logic; -- 0: don't do anything; 1: reg is enabled
-	O:	out std_logic_vector(3 downto 0) -- output the current register content. 
-);
-end component;
+    port(	
+        I:	in std_logic_vector (3 downto 0); -- for loading
+        clock:		in std_logic; -- rising-edge triggering 
+        enable:		in std_logic; -- 0: don't do anything; 1: reg is enabled
+        O:	out std_logic_vector(3 downto 0) -- output the current register content. 
+    );
+    end component;
+
+component mux 
+    port(
+        A: IN std_logic;
+        B: IN std_logic;
+        C: IN std_logic;
+        D: IN std_logic;
+        S: IN std_logic_vector (1 downto 0);
+        Y: OUT std_logic
+    );
+    end component;
+    
+    signal A : std_logic := '0';
+    signal B : std_logic := '0';
+    signal C : std_logic := '0';
+    signal D : std_logic := '0';
+    signal S : std_logic_vector (1 downto 0) := (others=>'0');
+    signal Y : std_logic;
 
 --  Specifies which entity is bound with the component.
 -- for reg_0: reg use entity work.reg(rtl);
@@ -22,7 +40,15 @@ signal i, o : std_logic_vector(3 downto 0);
 signal clk, enable : std_logic;
 begin
 --  Component instantiation.
+m1: mux port map();
 reg_0: reg port map (I => i, clock => clk, enable => enable, O => o);
+reg_1: reg port map (I => i, clock => clk, enable => enable, O => o);
+reg_2: reg port map (I => i, clock => clk, enable => enable, O => o);
+reg_3: reg port map (I => i, clock => clk, enable => enable, O => o);
+reg_4: reg port map (I => i, clock => clk, enable => enable, O => o);
+reg_5: reg port map (I => i, clock => clk, enable => enable, O => o);
+reg_6: reg port map (I => i, clock => clk, enable => enable, O => o);
+reg_7: reg port map (I => i, clock => clk, enable => enable, O => o);
 
 --  This process does the real job.
 process
