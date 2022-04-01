@@ -13,7 +13,7 @@ end reg;
 architecture behav of reg is
 
 begin
-    process(clock, enable)
+    process(clock)
     begin
       if rising_edge(clock) then
         if (enable = '1') then

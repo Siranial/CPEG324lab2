@@ -13,8 +13,8 @@ architecture Behavioral of testbench is
         B: IN std_logic;
         C: IN std_logic;
         D: IN std_logic;
-        S: IN std_logic_vector (1 downto 0));
-        Y: OUT std_logic; 
+        S: IN std_logic_vector (1 downto 0);
+        Y: OUT std_logic
     );
     END COMPONENT;
     
@@ -23,7 +23,6 @@ architecture Behavioral of testbench is
     signal C : std_logic := '0';
     signal D : std_logic := '0';
     signal S : std_logic_vector (1 downto 0) := (others=>'0');
-    
     signal Y : std_logic;
 
 begin
@@ -37,7 +36,7 @@ begin
         );
     stim_proc: process
     begin
-        wait for 100ns;
+        wait for 100 ns;
         
         A<='1';
         B<='0';
