@@ -50,7 +50,6 @@ begin
         S<="10";
         wait for 100 ns;
         S<="11";
-        wait for 100 ns;
-        end process;
-
+        wait; -- Wait forever to finish simulation
+    end process;
 end Behavioral;
