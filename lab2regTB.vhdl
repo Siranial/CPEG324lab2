@@ -10,7 +10,7 @@ architecture behav of reg_tb is
 component reg
 port(	
 	I:	in std_logic_vector (3 downto 0); -- for loading
-      	clock:		in std_logic; -- rising-edge triggering 
+    clock:		in std_logic; -- rising-edge triggering 
 	enable:		in std_logic; -- 0: don't do anything; 1: reg is enabled
 	O:	out std_logic_vector(3 downto 0) -- output the current register content. 
 );

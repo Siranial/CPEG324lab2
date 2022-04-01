@@ -15,6 +15,7 @@ architecture behav of reg is
 begin
     process(clock)
     begin
+      O<="0000";
       if rising_edge(clock) then
         if (enable = '1') then
           O<=I;
