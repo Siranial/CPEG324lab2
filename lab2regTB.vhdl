@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
---  A testbench has no ports.
+
 entity reg_tb is
 end reg_tb;
 
