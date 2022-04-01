@@ -37,7 +37,7 @@ end record;
 type pattern_array is array (natural range <>) of pattern_type;
 constant patterns : pattern_array :=
 (("0001", '0', '1', "0000"),
-("0001", '1', '1', "0001")); -- Need two vectors to simulate an edge.
+("0001", '1', '1', "0001"),("0011", '1', '0', "0001"),("0001", '0', '0', "0000")); -- Need two vectors to simulate an edge.
 begin
 --  Check each pattern.
 	for n in patterns'range loop
