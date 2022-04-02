@@ -94,8 +94,8 @@ end record;
 --  The patterns to apply.
 type pattern_array is array (natural range <>) of pattern_type;
 constant patterns : pattern_array :=
-(("0001", "000", '0', '1', "0000"),
-("0001", "000", '1', '1', "0001"),
+(("0001", "000", '0', '0', "0000"),
+("0001", "000", '1', '0', "0000"),
 ("1001", "000", '0', '1', "0000"),
 ("1001", "000", '1', '1', "1001"),
 ("1101", "001", '0', '1', "0000"),
@@ -121,21 +121,21 @@ constant patterns : pattern_array :=
 ("0011", "111", '0', '0', "0001")
 );
 begin
---  Check each pattern.
+    --  Check each pattern.
 	for n in patterns'range loop
---  Set the inputs.
+    --  Set the inputs.
 		i <= patterns(n).i;
         s <= patterns(n).s;
 		clk <= patterns(n).clock;
 		enable <= patterns(n).enable;
---  Wait for the results.
+    --  Wait for the results.
 		wait for 1 ns;
---  Check the outputs.
+    --  Check the outputs.
 		assert o = patterns(n).o
 		report "bad output value" severity error;
 	end loop;
 	assert false report "end of test" severity note;
---  Wait forever; this will finish the simulation.
+    --  Wait forever; this will finish the simulation.
 	wait;
 end process;
 end behav;
