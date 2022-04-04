@@ -2,16 +2,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity demux8 is
-    Port ( I : in STD_LOGIC_VECTOR (3 downto 0);
-           S : in STD_LOGIC_VECTOR (2 downto 0);
-           Y0 : out STD_LOGIC_VECTOR (3 downto 0);
-           Y1 : out STD_LOGIC_VECTOR (3 downto 0);
-           Y2 : out STD_LOGIC_VECTOR (3 downto 0);
-           Y3 : out STD_LOGIC_VECTOR (3 downto 0);
-           Y4 : out STD_LOGIC_VECTOR (3 downto 0);
-           Y5 : out STD_LOGIC_VECTOR (3 downto 0);
-           Y6 : out STD_LOGIC_VECTOR (3 downto 0);
-           Y7 : out STD_LOGIC_VECTOR (3 downto 0));
+    Port ( I : in std_logic;
+           S : in std_logic_vector (2 downto 0);
+           Y0 : out std_logic;
+           Y1 : out std_logic;
+           Y2 : out std_logic;
+           Y3 : out std_logic;
+           Y4 : out std_logic;
+           Y5 : out std_logic;
+           Y6 : out std_logic;
+           Y7 : out std_logic);
 end demux8;
 
 architecture Behavioral of demux8 is
@@ -30,4 +30,13 @@ begin
             when others => Y7 <= I;
         end case;
     end process;
+
+--    Y0 <= (not S(2) and not S(1) and not S(0)) and I;
+--    Y0 <= (not S(2) and not S(1) and S(0)) and I;
+--    Y0 <= (not S(2) and S(1) and not S(0)) and I;
+--    Y0 <= (not S(2) and S(1) and S(0)) and I;
+--    Y0 <= (S(2) and not S(1) and not S(0)) and I;
+--    Y0 <= (S(2) and not S(1) and S(0)) and I;
+--    Y0 <= (S(2) and S(1) and not S(0)) and I;
+--    Y0 <= (S(2) and S(1) and S(0)) and I;
 end Behavioral;
