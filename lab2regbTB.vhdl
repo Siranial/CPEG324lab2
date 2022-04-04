@@ -6,19 +6,26 @@ end regb_tb;
 
 architecture behav of regb_tb is
 --  Declaration of the component that will be instantiated.
-component demux8 is
-    port (  I : in std_logic;
-            S : in std_logic_vector (2 downto 0);
-            Y : out std_logic_vector (7 downto 0) := (others=>'0')
-            );
+component demux8
+    port(
+        I : in std_logic;
+        S : in std_logic_vector (2 downto 0);
+        Y0 : out std_logic;
+        Y1 : out std_logic;
+        Y2 : out std_logic;
+        Y3 : out std_logic;
+        Y4 : out std_logic;
+        Y5 : out std_logic;
+        Y6 : out std_logic;
+        Y7 : out std_logic);
 end component;
 
-component reg is
+component reg
     port(	
         I:	    in std_logic_vector (3 downto 0); -- for loading
         clock:	in std_logic; -- rising-edge triggering 
         enable:	in std_logic; -- 0: don't do anything; 1: reg is enabled
-        O:	    out std_logic_vector(3 downto 0) := (others=>'0') -- output the current register content. 
+        O:	    out std_logic_vector(3 downto 0) -- output the current register content. 
     );
 end component;
 
@@ -32,8 +39,7 @@ component mux8 is
             I6 : in std_logic_vector (3 downto 0);
             I7 : in std_logic_vector (3 downto 0);
             S : in std_logic_vector (2 downto 0);
-            Y : out std_logic_vector (3 downto 0) := (others=>'0')
-            );
+            Y : out std_logic_vector (3 downto 0));
 end component;
     
 -- Write enable wires that connect demux to registers
@@ -51,12 +57,12 @@ signal R7 : std_logic_vector (3 downto 0) := (others=>'0');
 -- Input signals
 signal i, o : std_logic_vector (3 downto 0) := (others=>'0');
 signal s : std_logic_vector (2 downto 0) := (others=>'0');
-signal clk, enable : std_logic := (others=>'0');
+signal clk, enable : std_logic;
 
 begin
 --  Component instantiation.
-writedemux8: demux8 port map (  I => enable, S => s, Y(0) => W(0), Y(1) => W(1), Y(2) => W(2), 
-                                Y(3) => W(3), Y(4) => W(4), Y(5) => W(5), Y(6) => W(6), Y(7) => W(7));
+writedemux8: demux8 port map (  I => enable, S => s, Y0 => W(0), Y1 => W(1), Y2 => W(2), 
+                                Y3 => W(3), Y4 => W(4), Y5 => W(5), Y6 => W(6), Y7 => W(7));
 reg0: reg port map (i => i, clock => clk, enable => W(0), O => R0);
 reg1: reg port map (i => i, clock => clk, enable => W(1), O => R1);
 reg2: reg port map (i => i, clock => clk, enable => W(2), O => R2);
