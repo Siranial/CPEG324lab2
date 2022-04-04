@@ -64,11 +64,11 @@ signal R7 : std_logic_vector (3 downto 0) := (others=>'0');
 -- Input signals
 signal i, o : std_logic_vector (3 downto 0) := (others=>'0');
 signal s : std_logic_vector (2 downto 0) := (others=>'0');
-signal clk, enable : std_logic := '0';
+signal clk, enable : std_logic;
 
 begin
 --  Component instantiation.
-writedemux8: demux8 port map (  I => i, S => S, Y0 => W0, Y1 => W1, Y2 => W2, 
+writedemux8: demux8 port map (  I => i, S => s, Y0 => W0, Y1 => W1, Y2 => W2, 
                                 Y3 => W3, Y4 => W4, Y5 => W5, Y6 => W6, Y7 => W7);
 reg0: reg port map (i => W0, clock => clk, enable => enable, O => R0);
 reg1: reg port map (i => W1, clock => clk, enable => enable, O => R1);
@@ -97,9 +97,9 @@ constant patterns : pattern_array :=
 (("0001", "000", '0', '0', "0000"),
 ("0001", "000", '1', '0', "0000"),
 ("1001", "000", '0', '1', "0000"),
-("1001", "000", '1', '1', "0001"),
-("1101", "001", '0', '1', "0001"),
-("0001", "001", '1', '1', "0000")
+("1001", "000", '1', '1', "1001"),
+("1101", "001", '0', '1', "1001"),
+("0001", "001", '1', '1', "1001")
 --("1111", "001", '0', '0', "0000")
 --("0101", "010", '1', '1', "0000"),
 --("0101", "010", '0', '1', "0101"),
