@@ -39,6 +39,7 @@ component mux8 is
             I6 : in STD_LOGIC_VECTOR (3 downto 0);
             I7 : in STD_LOGIC_VECTOR (3 downto 0);
             S : in STD_LOGIC_VECTOR (2 downto 0);
+            enable : in std_logic;
             Y : out STD_LOGIC_VECTOR (3 downto 0));
 end component;
     
@@ -79,7 +80,8 @@ reg5: reg port map (i => W5, clock => clk, enable => enable, O => R5);
 reg6: reg port map (i => W6, clock => clk, enable => enable, O => R6);
 reg7: reg port map (i => W7, clock => clk, enable => enable, O => R7);
 readmux8: mux8 port map (   I0 => R0, I1 => R1, I2 => R2, I3 => R3, I4 => R4, 
-                            I5 =>R5, I6 => R6, I7 => R7, S => s, Y => o);
+                            I5 =>R5, I6 => R6, I7 => R7, S => s, enable => enable,
+                            Y => o);
 
 --  This process does the real job.
 process
@@ -95,7 +97,7 @@ end record;
 type pattern_array is array (natural range <>) of pattern_type;
 constant patterns : pattern_array :=
 (("0001", "000", '0', '0', "0000"),
-("0001", "000", '1', '1', "0000"),
+("0001", "000", '1', '1', "0000"), --enable is not being set properly somehow
 ("1001", "000", '0', '0', "0000"),
 ("1001", "000", '1', '0', "0001"),
 ("1101", "001", '0', '1', "0001"),
