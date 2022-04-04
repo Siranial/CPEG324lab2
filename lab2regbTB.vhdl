@@ -51,7 +51,7 @@ signal R7 : std_logic_vector (3 downto 0) := (others=>'0');
 -- Input signals
 signal i, o : std_logic_vector (3 downto 0) := (others=>'0');
 signal s : std_logic_vector (2 downto 0) := (others=>'0');
-signal clk, enable : std_logic := (others=>'0');
+signal clk, enable : std_logic;
 
 begin
 --  Component instantiation.
