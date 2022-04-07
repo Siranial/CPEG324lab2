@@ -2,15 +2,17 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity regb is
-    Port (  I: in std_logic_vector (3 downto 0);
-            S: in std_logic_vector (2 downto 0);
+    Port (  i: in std_logic_vector (3 downto 0) := (others=>'0');
+            s: in std_logic_vector (2 downto 0) := (others=>'0');
             clk, enable: in std_logic;
-            O: out std_logic_vector (3 downto 0)
+            o: out std_logic_vector (3 downto 0) := (others=>'0')
             );
 end regb;
 
 architecture behav of regb is
 --  Declaration of the component that will be instantiated.
+
+
 component demux8 is
     port (  I : in std_logic;
             S : in std_logic_vector (2 downto 0);
@@ -19,11 +21,12 @@ component demux8 is
 end component;
 
 component reg is
-    port(	I:	    in std_logic_vector (3 downto 0); -- for loading
-            clock:	in std_logic; -- rising-edge triggering 
-            enable:	in std_logic; -- 0: don't do anything; 1: reg is enabled
-            O:	    out std_logic_vector(3 downto 0) := (others=>'0') -- output the current register content. 
-            );
+    port(	
+        I:	    in std_logic_vector (3 downto 0); -- for loading
+        clock:	in std_logic; -- rising-edge triggering 
+        enable:	in std_logic; -- 0: don't do anything; 1: reg is enabled
+        O:	    out std_logic_vector(3 downto 0) := (others=>'0') -- output the current register content. 
+    );
 end component;
 
 component mux8 is
@@ -52,11 +55,6 @@ signal R5 : std_logic_vector (3 downto 0) := (others=>'0');
 signal R6 : std_logic_vector (3 downto 0) := (others=>'0');
 signal R7 : std_logic_vector (3 downto 0) := (others=>'0');
 
--- Input signals
-signal i, o : std_logic_vector (3 downto 0) := (others=>'0');
-signal s : std_logic_vector (2 downto 0) := (others=>'0');
-signal clk, enable : std_logic;
-
 begin
 --  Component instantiation.
 writedemux8: demux8 port map (  I => enable, S => s, Y(0) => W(0), Y(1) => W(1), Y(2) => W(2), 
@@ -71,4 +69,5 @@ reg6: reg port map (i => i, clock => clk, enable => W(6), O => R6);
 reg7: reg port map (i => i, clock => clk, enable => W(7), O => R7);
 readmux8: mux8 port map (   I0 => R0, I1 => R1, I2 => R2, I3 => R3, I4 => R4, 
                             I5 => R5, I6 => R6, I7 => R7, S => s, Y => o);
+
 end behav;
