@@ -6,6 +6,8 @@ end regb_tb;
 
 architecture behav of regb_tb is
 --  Declaration of the component that will be instantiated.
+
+
 component demux8 is
     port (  I : in std_logic;
             S : in std_logic_vector (2 downto 0);
@@ -81,13 +83,13 @@ end record;
 --  The patterns to apply.
 type pattern_array is array (natural range <>) of pattern_type;
 constant patterns : pattern_array :=
-(("0001", "000", '0', '0', "0000"),
-("0001", "000", '1', '1', "0001"),
-("1001", "000", '0', '0', "0001"),
-("1001", "000", '1', '1', "1001"),
-("1101", "001", '0', '0', "0000"), -- enable is delayed by 1 vector.
-("1001", "001", '1', '0', "0000"), -- when enable is 1 for previous vector,
-("1111", "001", '0', '0', "0000"), -- enable is seen as 1 for current vector.
+(("0001", "000", '0', '1', "0000"),
+("0001", "000", '1', '0', "0001"),
+("1001", "000", '0', '1', "0001"),
+("1001", "000", '1', '0', "1001"),
+("1101", "001", '0', '1', "0000"), -- enable is delayed by 1 vector.
+("1001", "001", '1', '0', "1001"), -- when enable is 1 for previous vector,
+("1111", "001", '0', '1', "1001"), -- enable is seen as 1 for current vector.
 ("0101", "001", '1', '1', "0101")
 --("0101", "010", '0', '1', "0101"),
 --("0101", "010", '1', '0', "0000"),
