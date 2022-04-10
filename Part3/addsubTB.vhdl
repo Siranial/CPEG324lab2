@@ -39,8 +39,11 @@ end record;
 --  The patterns to apply.
 type pattern_array is array (natural range <>) of pattern_type;
 constant patterns : pattern_array :=
+--  a   ,   b   ,  s , cuf, cof,   o
 (("0100", "0010", '0', '0', '0', "0110"), -- 4 + 2 = 6
-("0100", "0001", '1', '0', '0', "0011") -- 4 - 1 = 3
+("0100", "0001", '1', '0', '0', "0011"), -- 4 - 1 = 3
+("0100", "0110", '1', '1', '0', "1110"), -- 4 - 6 = -1 underflow
+("0100", "1110", '0', '0', '1', "0010") -- 4 + 14 = 18 overflow
 );
 begin
 --  Check each pattern.
