@@ -5,7 +5,7 @@ entity alu is
     Port (  A: in std_logic_vector (3 downto 0);
             B: in std_logic_vector (3 downto 0);
             S: in std_logic; -- Selects adding / subtracting
-            CUF, COF: out std_logic; -- Carry under and overflow bits
+            CUF, COF: out std_logic; -- Carry under and overflow bits respectively
             O: out std_logic_vector (3 downto 0));
 end alu;
 
@@ -55,12 +55,12 @@ architecture behavioral of alu is
         TCc(2) <= B(2) and TCc(1);
         twosComp(3) <= B(3) xor TCc(2);
 
-        --Demux 2 to 1 for adding / subtracting
+        --Mux 2 to 1 for adding / subtracting
         with S select
         aluB<=  B when '0',
                 twosComp when others;
 
-        --Select underflow or overflow
+        --Demux 1 to 2 to select underflow or overflow
         COF <= FAcout(3) and (not S);
         CUF <= FAcout(3) and S;
 
