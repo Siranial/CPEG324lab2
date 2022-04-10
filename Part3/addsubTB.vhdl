@@ -40,7 +40,7 @@ end record;
 type pattern_array is array (natural range <>) of pattern_type;
 constant patterns : pattern_array :=
 (("0100", "0010", '0', '0', '0', "0110"), -- 4 + 2 = 6
-("0100", "0010", '1', '0', '0', "0010") -- 4 - 2 = 2
+("0100", "0001", '1', '0', '0', "0011") -- 4 - 1 = 3
 );
 begin
 --  Check each pattern.

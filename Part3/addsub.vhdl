@@ -25,14 +25,14 @@ architecture behavioral of alu is
                 );
     end component;
     
-    signal twosComp : std_logic_vector (3 downto 0);
+    signal tComp : std_logic_vector (3 downto 0) := (others=>'0');
     signal aluB : std_logic_vector (3 downto 0);
     signal FAcout : std_logic_vector (3 downto 0);
     signal TCc : std_logic_vector (2 downto 0);
 
     begin
 
-        mux : mux2to1 port map(A => B, B => twosComp, S => S, Y => aluB);
+        mux : mux2to1 port map(A => B, B => tComp, S => S, Y => aluB);
 
         FA0 : fullAdder port map(A => A(0), B => aluB(0), Cin => '0', 
                                 O => O(0), Cout => FAcout(0));
@@ -47,21 +47,16 @@ architecture behavioral of alu is
                                 O => O(3), Cout => FAcout(3));
 
         --Twos complement for B
-        twosComp(0) <= B(0) xor '1';
-        TCc(0) <= B(0) and '1';
-        twosComp(1) <= B(1) xor TCc(0);
-        TCc(1) <= B(1) and TCc(0);
-        twosComp(2) <= B(2) xor TCc(1);
-        TCc(2) <= B(2) and TCc(1);
-        twosComp(3) <= B(3) xor TCc(2);
-
-        --Mux 2 to 1 for adding / subtracting
-        with S select
-        aluB<=  B when '0',
-                twosComp when others;
+        tComp(0) <= not(B(0)) xor '1';
+        TCc(0) <= not(B(0)) and '1';
+        tComp(1) <= not(B(1)) xor TCc(0);
+        TCc(1) <= not(B(1)) and TCc(0);
+        tComp(2) <= not(B(2)) xor TCc(1);
+        TCc(2) <= not(B(2)) and TCc(1);
+        tComp(3) <= not(B(3)) xor TCc(2);
 
         --Demux 1 to 2 to select underflow or overflow
         COF <= FAcout(3) and (not S);
-        CUF <= FAcout(3) and S;
+        CUF <= not(FAcout(3)) and S;
 
 end behavioral;
