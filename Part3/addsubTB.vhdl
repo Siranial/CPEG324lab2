@@ -42,8 +42,8 @@ constant patterns : pattern_array :=
 --  a   ,   b   ,  s , cuf, cof,   o
 (("0100", "0010", '0', '0', '0', "0110"), -- 4 + 2 = 6
 ("0100", "0001", '1', '0', '0', "0011"), -- 4 - 1 = 3
-("0100", "0110", '1', '1', '0', "1110"), -- 4 - 6 = -1 underflow
-("0100", "1110", '0', '0', '1', "0010") -- 4 + 14 = 18 overflow
+("1100", "1001", '1', '1', '0', "0011"), -- -4 - 7 = -11 underflow
+("0100", "0101", '0', '0', '1', "1001") -- 4 + 5 = 9 overflow
 );
 begin
 --  Check each pattern.
@@ -56,9 +56,9 @@ begin
 		wait for 1 ns;
 --  Check the outputs.
 		assert cuf = patterns(n).cuf
-		report "bad output value" severity error;
+		report "bad cuf value" severity error;
 		assert cof = patterns(n).cof
-		report "bad output value" severity error;
+		report "bad cof value" severity error;
 		assert o = patterns(n).o
 		report "bad output value" severity error;
 	end loop;

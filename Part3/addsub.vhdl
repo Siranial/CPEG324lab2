@@ -56,7 +56,7 @@ architecture behavioral of alu is
         tComp(3) <= not(B(3)) xor TCc(2);
 
         --Demux 1 to 2 to select underflow or overflow
-        COF <= FAcout(3) and (not S);
-        CUF <= not(FAcout(3)) and S;
+        COF <= FAcout(2) and (not S);
+        CUF <= (FAcout(3) and not(aluB(3))) and S;
 
 end behavioral;
