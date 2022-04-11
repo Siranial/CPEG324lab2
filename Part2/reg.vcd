@@ -1,0 +1,53 @@
+$date
+  Sun Apr 10 22:35:09 2022
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$scope module standard $end
+$upscope $end
+$scope module std_logic_1164 $end
+$upscope $end
+$scope module reg_tb $end
+$var reg 4 ! i[3:0] $end
+$var reg 4 " o[3:0] $end
+$var reg 1 # clk $end
+$var reg 1 $ enable $end
+$scope module reg_0 $end
+$var reg 4 % i[3:0] $end
+$var reg 1 & clock $end
+$var reg 1 ' enable $end
+$var reg 4 ( o[3:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+b0001 !
+b0000 "
+0#
+0$
+b0001 %
+0&
+0'
+b0000 (
+#1000000
+1#
+1&
+#2000000
+b0011 !
+0#
+1$
+b0011 %
+0&
+1'
+#3000000
+b0001 !
+b0001 "
+1#
+b0001 %
+1&
+b0001 (
+#4000000
